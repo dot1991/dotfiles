@@ -1,0 +1,6 @@
+#!/bin/sh
+. "$ROOT/settings.sh"
+
+unlink ~/.config/kitty/colors-kitty.conf
+
+unlink ~/.config/kitty
