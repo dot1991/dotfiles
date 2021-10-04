@@ -1,5 +1,5 @@
 #!/bin/sh
 
-ln -fs "$PWD/zshrc" ~/.zshrc
-ln -fs "$PWD/zsh" ~/.zsh
-ln -fs "$PWD/starship.toml" ~/.config/starship.toml
+ln -Tfs "$PWD/zshrc" ~/.zshrc
+ln -Tfs "$PWD/zsh" ~/.zsh
+ln -Tfs "$PWD/starship.toml" ~/.config/starship.toml

@@ -6,12 +6,14 @@ UNINSTALL_SCRIPT="uninstall"
 # https://stackoverflow.com/questions/4774054/reliable-way-for-a-bash-script-to-get-the-full-path-to-itself
 SELF="$( cd -- "$(dirname "$0")" >/dev/null 2>&1 || exit 1 ; pwd -P )"
 
+exit 1
+
 install_from() {
 	for folder in "$@"; do
 		[ -d "$folder" ] && \
 		[ -x "$folder/$INSTALL_SCRIPT" ] && \
 		printf "\nInstalling %s\n" "$(basename "$folder")" && \
-		env -C "$folder" "./$INSTALL_SCRIPT"
+		env -C "$folder" "ROOT=$SELF" "./$INSTALL_SCRIPT"
 	done
 }
 
@@ -20,7 +22,7 @@ uninstall_from() {
 		[ -d "$folder" ] && \
 		[ -x "$folder/$UNINSTALL_SCRIPT" ] && \
 		printf "\nUninstalling %s\n" "$(basename "$folder")" && \
-		env -C "$folder" "./$UNINSTALL_SCRIPT"
+		env -C "$folder" "ROOT=$SELF" "./$UNINSTALL_SCRIPT"
 	done
 }
 

@@ -2,3 +2,4 @@
 
 unlink ~/.zshrc
 unlink ~/.zsh
+unlink ~/.config/starship.toml
