@@ -1,0 +1,73 @@
+#!/bin/sh
+export IFS=$'\n'
+
+if [ -f "/etc/os-release" ]; then
+	. "/etc/os-release"
+	os="$PRETTY_NAME"
+else
+	os="$(uname -o)"
+fi
+
+get_ppid() {
+	ps -p "$1" -o ppid= | awk '{print $1}'
+}
+
+user="$(whoami)"
+hostname="$(cat /etc/hostname)"
+
+arch="$(uname -m)"
+kernel="$(uname -r)"
+uptime="$(uptime -p|cut -d ' ' -f2-)"
+packages="$(pacman -Q|wc -l)"
+editor="$EDITOR"
+terminal="$(ps -p $(get_ppid $(get_ppid $$)) -o cmd=)"
+session="$XDG_CURRENT_DESKTOP"
+screens="$(xrandr|sed -nr 's/.* connected (primary )?([0-9]+x[0-9]+).*/\2/p'|xargs)"
+
+
+cpu="$(lscpu|awk '$1=="Model" && $2=="name:" {for(i=3;i<=NF-3;i++) printf("%s ",$i);printf("\n");}')"
+mem="$(free -b|awk 'NR==2 {print int(($2-$NF)/1024/1024)" / "int($2/1024/1024)" MiB"}')"
+gpus=($(lspci|awk '$2=="VGA" {for(i=5;i<=NF-2;i++) printf("%s ", $i); printf("\n");}'|sed -nr 's/Corporation //p'))
+
+C5="$(tput setaf 3)"
+BOLD="$(tput bold)"
+RESET="$(tput sgr0)"
+
+padding_left=4
+gap=2
+spacing=15
+
+print_spaces() {
+	printf "%${1}s" " "
+}
+
+print_entry() {
+	print_spaces "$padding_left"
+	echo -en "$BOLD$1$RESET"
+	print_spaces "$gap"
+	echo -en "$C5$BOLD$2$RESET"
+	print_spaces $((spacing-${#2}))
+	echo -en "$3\n"
+}
+
+echo ""
+combo="$BOLD$user$RESET@$BOLD$hostname$RESET"
+print_spaces $((spacing+padding_left-${#combo}))
+echo -e "$combo"
+echo ""
+print_entry "" "os" "$os"
+print_entry "﬙" "arch" "$arch"
+print_entry "" "kernel" "$kernel"
+print_entry "" "uptime" "$uptime"
+print_entry "" "packages" "$packages"
+print_entry "" "editor" "$editor"
+print_entry "" "terminal" "$terminal"
+print_entry "" "session" "$session"
+print_entry "" "screens" "$screens"
+print_entry "" "cpu" "$cpu"
+print_entry "" "memory" "$mem"
+for gpu in ${gpus[@]}; do
+	print_entry "" "gpu" "$gpu"
+done
+
+echo ""
