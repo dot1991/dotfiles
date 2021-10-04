@@ -1,12 +1,10 @@
 #!/bin/sh
-
-INSTALL_SCRIPT="install"
-UNINSTALL_SCRIPT="uninstall"
+set -e
 
 # https://stackoverflow.com/questions/4774054/reliable-way-for-a-bash-script-to-get-the-full-path-to-itself
 SELF="$( cd -- "$(dirname "$0")" >/dev/null 2>&1 || exit 1 ; pwd -P )"
 
-exit 1
+. "$SELF/settings.sh"
 
 install_from() {
 	for folder in "$@"; do

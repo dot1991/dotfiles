@@ -1,3 +1,5 @@
 #!/bin/sh
+set -e
+. "$ROOT/settings.sh"
 
-ln -Tfs "$PWD/picom" ~/.config/picom
+ln "$PWD/picom" ~/.config/picom

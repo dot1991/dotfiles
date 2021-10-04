@@ -1,3 +1,5 @@
 #!/bin/sh
+set -e
+. "$ROOT/settings.sh"
 
-ln -Tfs "$PWD/i3" ~/.config/i3
+ln "$PWD/i3" ~/.config/i3

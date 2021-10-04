@@ -1,5 +1,7 @@
 #!/bin/sh
+set -e
+. "$ROOT/settings.sh"
 
-ln -Tfs "$PWD/zshrc" ~/.zshrc
-ln -Tfs "$PWD/zsh" ~/.zsh
-ln -Tfs "$PWD/starship.toml" ~/.config/starship.toml
+ln "$PWD/zshrc" ~/.zshrc
+ln "$PWD/zsh" ~/.zsh
+ln "$PWD/starship.toml" ~/.config/starship.toml
