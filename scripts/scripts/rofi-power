@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+
+# rofi-power
+# Use rofi to call systemctl for shutdown, reboot, etc
+
+# 2016 Oliver Kraitschy - http://okraits.de
+
+# Show KDE Menu for logging out
+qdbus org.kde.ksmserver /KSMServer org.kde.KSMServerInterface.logout -1 -1 -1
+
+exit
+
+OPTIONS="Lock\n\nLogout\nPower-off\nReboot"
+
+LAUNCHER="rofi -width 30 -dmenu -i -p rofi-power"
+LOCKER="$HOME/.config/scripts/lock.sh"
+
+option=`echo -e $OPTIONS | $LAUNCHER | awk '{print $1}' | tr -d '\r\n'`
+if [ ${#option} -gt 0 ]; then
+	case $option in
+		Lock)
+			$LOCKER
+		;;
+		Logout)
+			#i3-msg exit
+			qdbus org.kde.ksmserver /KSMServer logout 0 3 3
+		;;
+		Power-off)
+			shutdown -P now
+		;;
+		Reboot)
+			reboot
+		;;
+		*)
+		;;
+	esac
+fi
