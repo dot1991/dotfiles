@@ -9,5 +9,5 @@ UNINSTALL_SCRIPT="uninstall"
 
 # Link command
 ln() {
-	/bin/ln -Tfs "$1" "$2"
+	/bin/ln -Tfs "$PWD/$1" "$2"
 }

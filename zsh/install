@@ -2,6 +2,6 @@
 set -e
 . "$ROOT/settings.sh"
 
-ln "$PWD/zshrc" ~/.zshrc
-ln "$PWD/zsh" ~/.zsh
-ln "$PWD/starship.toml" ~/.config/starship.toml
+ln "zshrc" ~/.zshrc
+ln "zsh" ~/.zsh
+ln "starship.toml" ~/.config/starship.toml

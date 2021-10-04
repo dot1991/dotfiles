@@ -2,4 +2,4 @@
 set -e
 . "$ROOT/settings.sh"
 
-ln "$PWD/i3" ~/.config/i3
+ln "i3" ~/.config/i3
