@@ -1,0 +1,17 @@
+[include]
+	path = ~/.gitconfig.local
+[commit]
+	gpgsign = true
+[hub]
+	protocol = ssh
+[init]
+	defaultBranch = master
+[gpg]
+	program = gpg2
+[diff]
+	tool = meld
+[filter "lfs"]
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f

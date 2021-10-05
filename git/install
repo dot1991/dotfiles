@@ -1,0 +1,8 @@
+#!/bin/sh
+set -e
+. "$ROOT/settings.sh"
+
+ln gitconfig ~/.gitconfig
+ln gitconfig.local ~/.gitconfig.local
+
+ln hub ~/.config/hub
