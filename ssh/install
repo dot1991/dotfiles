@@ -1,0 +1,5 @@
+#!/bin/sh
+set -e
+. "$ROOT/settings.sh"
+
+ln ssh.local ~/.ssh
