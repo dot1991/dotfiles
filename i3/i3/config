@@ -21,20 +21,8 @@ for_window [class="^.*"] border pixel 2
 
 # KDE Plasma configuration
 
-# Don’t treat Plasma pop-ups as full-sized windows
-#for_window [class="plasmashell"] floating enable
-#for_window [class="plasmashell"] border none
-
-# Don’t spawn an empty window for the Plasma Desktop
 #for_window [title="Desktop — Plasma"] kill, floating enable, border none
-
-# Don’t let notifications and non-interactive pop-up windows steal focus
-#no_focus [class="plasmashell" window_type="notification"]
-#no_focus [class="plasmashell" window_type="on_screen_display"]
-
-#for_window [class="krunner"] border none
-
-for_window [title="Desktop — Plasma"] kill, floating enable, border none
+for_window [title="Desktop — Plasma"] move scratchpad, floating enable, border none
 for_window [class="plasmashell"] floating enable, border none
 for_window [class="Plasma"] floating enable, border none
 for_window [title="plasma-desktop"] floating enable, border none
@@ -44,7 +32,7 @@ for_window [class="Kmix"] floating enable, border none
 for_window [class="Klipper"] floating enable, border none
 for_window [class="Plasmoidviewer"] floating enable; border none
 for_window [class="(?i)*nextcloud*"] floating disable
-for_window [class="plasmashell" window_type="notification"] floating enable, border none, move position 50 50
+for_window [class="plasmashell" window_type="notification"] floating enable, border none
 no_focus [class="plasmashell" window_type="notification"] 
 
 # Volume keys
@@ -148,7 +136,7 @@ bindsym XF86MonBrightnessDown exec ~/.config/scripts/backlight.sh dec 5
 
 ### Other apps
 bindsym $mod+Shift+Return exec --no-startup-id kitty
-bindsym $mod+Shift+f exec --no-startup-id brave --enable-features=VaapiVideoDecoder --use-gl=desktop
+bindsym $mod+Shift+f exec --no-startup-id chromium --enable-features=VaapiVideoDecoder --use-gl=desktop
 bindsym $mod+t exec --no-startup-id dolphin
 bindsym $mod+d exec --no-startup-id rofi -show-icons -show drun
 
