@@ -2,6 +2,11 @@
 
 ### How to install
 
+Clone the repo:
+```
+$ git clone --recursive https://github.com/threadexio/dotfiles
+```
+
 Run:
 ```
 $ ./run.sh install [specific folder]
