@@ -1,0 +1,9 @@
+#!/bin/sh
+set -e
+. "$ROOT/settings.sh"
+
+ln nvim ~/.config/nvim
+
+cat << EOF
+Also install the neovim python module from pip or your package manager
+EOF
