@@ -2,5 +2,3 @@
 . "$ROOT/settings.sh"
 
 ln kitty ~/.config/kitty
-
-ln ~/.cache/wal/colors-kitty.conf ~/.config/kitty/colors-kitty.conf
