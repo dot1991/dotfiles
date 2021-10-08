@@ -27,25 +27,24 @@ decrypt() {
 # u=rwx g= o=
 umask 077
 
-
-
-
 out="${OUT:=$(basename "$PWD")}"
 
 command="$1"
-shift
 
 temp="$(mktemp -d)"
 case "$command" in
 	"enc")
+		shift
 		keyid="$1"
 		shift
 		encrypt "$@"
 	;;
 	"dec")
+		shift
 		decrypt "$@"
 	;;
 	*)
+		help
 	;;
 esac
 rm -rf -- "$temp"
