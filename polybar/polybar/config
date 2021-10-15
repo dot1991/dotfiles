@@ -43,6 +43,10 @@ monitor = eDP1
 inherit = bar/master
 monitor = HDMI-1-0
 
+[bar/DP-1-4]
+inherit = bar/master
+monitor = DP-1-4
+
 [bar/master]
 monitor-strict = true
 monitor-exact = true

@@ -113,6 +113,12 @@ function set_win_title(){
 # user@linux:~$
 setopt auto_cd
 
+# Can negate glob with ^*
+#
+# user@linux:~$ rm -- ^file.txt
+# Will remove everything except file.txt
+setopt extendedglob
+
 #############################
 ######### Keybinds ##########
 #############################

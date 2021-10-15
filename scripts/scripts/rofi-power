@@ -6,9 +6,7 @@
 # 2016 Oliver Kraitschy - http://okraits.de
 
 # Show KDE Menu for logging out
-qdbus org.kde.ksmserver /KSMServer org.kde.KSMServerInterface.logout -1 -1 -1
-
-exit
+#qdbus org.kde.ksmserver /KSMServer org.kde.KSMServerInterface.logout -1 -1 -1
 
 OPTIONS="Lock\n\nLogout\nPower-off\nReboot"
 
@@ -22,8 +20,8 @@ if [ ${#option} -gt 0 ]; then
 			$LOCKER
 		;;
 		Logout)
-			#i3-msg exit
-			qdbus org.kde.ksmserver /KSMServer logout 0 3 3
+			i3-msg exit
+			#qdbus org.kde.ksmserver /KSMServer logout 0 3 3
 		;;
 		Power-off)
 			shutdown -P now

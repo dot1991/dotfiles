@@ -13,22 +13,22 @@
 
 backlight="/usr/bin/xbacklight"
 
-min=85
+min=10
 
 get_brightness() {
-	#$backlight -get
-	qdbus-qt5 local.org_kde_powerdevil /org/kde/Solid/PowerManagement/Actions/BrightnessControl brightness
+	printf "%.0f" "$($backlight -get)"
+	#qdbus-qt5 local.org_kde_powerdevil /org/kde/Solid/PowerManagement/Actions/BrightnessControl brightness
 }
 
 set_brightness() {
-	#$backlight -set $1
-	qdbus-qt5 local.org_kde_powerdevil /org/kde/Solid/PowerManagement/Actions/BrightnessControl setBrightness $1
+	$backlight -set $1
+	#qdbus-qt5 local.org_kde_powerdevil /org/kde/Solid/PowerManagement/Actions/BrightnessControl setBrightness $1
 }
 
 get_steps() {
-	#echo -n 5
+	echo -n 5
 	#qdbus-qt5 local.org_kde_powerdevil /org/kde/Solid/PowerManagement/Actions/BrightnessControl brightnessSteps
-	echo -n 80
+	#echo -n 80
 }
 
 # $1 - amount to increase by

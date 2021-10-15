@@ -22,6 +22,31 @@ for_window [class="^.*"] border pixel 2
 gaps inner 10
 gaps outer 10
 
+# KDE Plasma configuration
+
+for_window [title="Desktop — Plasma"] floating enable, border none, move scratchpad
+#for_window [title="Desktop — Plasma"] kill, floating enable, border none
+#for_window [title="Desktop — Plasma"] move scratchpad, floating enable, border none
+for_window [class="plasmashell"] floating enable, border none
+for_window [class="Plasma"] floating enable, border none
+for_window [title="plasma-desktop"] floating enable, border none
+for_window [title="win7"] floating enable, border none
+for_window [class="krunner"] floating enable, border none
+for_window [class="Kmix"] floating enable, border none
+for_window [class="Klipper"] floating enable, border none
+for_window [class="Plasmoidviewer"] floating enable; border none
+for_window [class="(?i)*nextcloud*"] floating disable
+for_window [class="plasmashell" window_type="notification"] floating enable, border none
+no_focus [class="plasmashell" window_type="notification"] 
+
+# Volume keys
+bindsym XF86AudioRaiseVolume exec --no-startup-id qdbus org.kde.kglobalaccel /component/kmix invokeShortcut "increase_volume"
+bindsym XF86AudioLowerVolume exec --no-startup-id qdbus org.kde.kglobalaccel /component/kmix invokeShortcut "decrease_volume"
+bindsym XF86AudioMute exec --no-startup-id qdbus org.kde.kglobalaccel /component/kmix invokeShortcut "mute"
+bindsym $mod+m exec --no-startup-id qdbus org.kde.kglobalaccel /component/kmix invokeShortcut "mic_mute"
+
+# End KDE Plasma configuration
+
 set_from_resource $fg i3wm.color7 #f0f0f0
 set_from_resource $bg i3wm.color2 #f0f0f0
 
@@ -85,11 +110,11 @@ assign [class="lightcord"] $ws4
 ################
 
 ### Volume keys
-bindsym XF86AudioRaiseVolume   exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5%
-bindsym XF86AudioLowerVolume   exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5%
-bindsym XF86AudioMute          exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle
-bindsym XF86AudioMicMute       exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle
-bindsym $mod+m                 exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle
+#bindsym XF86AudioRaiseVolume   exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5%
+#bindsym XF86AudioLowerVolume   exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5%
+#bindsym XF86AudioMute          exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle
+#bindsym XF86AudioMicMute       exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle
+#bindsym $mod+m                 exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle
 
 ### Media keys
 bindsym XF86AudioPrev          exec --no-startup-id playerctl previous
@@ -107,7 +132,7 @@ bindsym XF86MonBrightnessDown exec ~/.config/scripts/backlight.sh dec 5
 ### Other apps
 bindsym $mod+Shift+Return exec --no-startup-id kitty
 bindsym $mod+Shift+f exec --no-startup-id chromium --enable-features=VaapiVideoDecoder --use-gl=desktop
-bindsym $mod+t exec --no-startup-id thunar 
+bindsym $mod+t exec --no-startup-id dolphin
 bindsym $mod+d exec --no-startup-id rofi -show-icons -show drun
 
 ### Utilities
@@ -229,4 +254,4 @@ bindsym $mod+r mode "resize"
 bindsym $mod+Shift+r exec --no-startup-id ~/.config/scripts/restart.sh
 
 # exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+#bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"

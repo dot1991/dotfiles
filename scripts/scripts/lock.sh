@@ -1,7 +1,6 @@
 #!/bin/bash
 
 # Used for kde
-qdbus org.kde.ksmserver /ScreenSaver org.freedesktop.ScreenSaver.Lock
+#qdbus org.kde.ksmserver /ScreenSaver org.freedesktop.ScreenSaver.Lock
 
-exit
-
+betterlockscreen -l blur
