@@ -5,6 +5,8 @@ killall -wq polybar
 
 i3-msg -q restart
 
+feh --bg-fill ~/.local/share/wallpapers/current
+
 # Start polybar again
 screens=($(xrandr | sed -nr 's|^(.*) connected.*$|\1|p'))
 

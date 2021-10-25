@@ -17,6 +17,7 @@
 ;==========================================================
 
 ;include-file = powerline-for-polybar.config
+include-file = ~/.config/polybar/apps.ini
 
 [colors]
 ;background = ${xrdb:background}
@@ -68,7 +69,7 @@ line-color = #f00
 border-size = 5
 border-color = #00000000
 
-radius = 0
+radius = 5
 
 padding-left = 1
 padding-right = 1
@@ -78,9 +79,9 @@ module-margin-right = 2
 
 font-0 = Inconsolata Nerd Font:pixelsize=15:antialias=true;3
 
-modules-left = logo i3 pulseaudio xkeyboard
-modules-center = media
-modules-right = battery wifi date
+modules-left = logo i3 xwindow
+modules-center = github reddit youtube discord code
+modules-right = xkeyboard wifi sep battery sep pulseaudio date powermenu
 
 tray-position = right
 ;tray-padding = 2
@@ -170,10 +171,9 @@ label = "%percentage_used%% "
 type = internal/date
 interval = 5
 
-date-alt = " %m/%d/%Y"
-date = "%a %b %e"
+date = ""
 
-time = "%H:%M %p"
+time = "%H:%M"
 time-alt = %H:%M:%S
 
 ;format-prefix = 
@@ -182,56 +182,22 @@ format-prefix-foreground = ${colors.foreground-alt}
 label = %date% %time%
 
 [module/powermenu]
-type = custom/menu
-
-label-open = ""
-label-open-font = 4
-label-close = "ﰸ"
-;label-close-foreground = ${colors.lime}
-label-separator = "  |  "
-;label-separator-foreground = ${colors.xcolor1}
-
-; logout
-menu-0-0 = "﫼"
-menu-0-0-exec = i3-msg exit
-menu-0-0-foreground = #FFDB00
-; reboot
-menu-0-2 = ""
-menu-0-2-exec = systemctl reboot
-menu-0-2-foreground = #FF4600
-; shutdown
-menu-0-1 = ""
-menu-0-1-exec = systemctl poweroff
-menu-0-1-foreground = #FF0000
+type = custom/text
+content = ""
+click-left = ~/.config/scripts/rofi-power
+content-foreground = #B48EAD
+content-padding = 1
 
 [module/pulseaudio]
 type = internal/pulseaudio
 
-format-volume = <label-volume> <bar-volume>
-;label-volume = 墳 %percentage%%
-label-volume = 墳
+format-volume = <label-volume> 
+label-volume = 墳 %percentage%%
 label-volume-foreground = ${root.foreground}
 
 ;label-muted =  muted
 label-muted = 
 label-muted-foreground = #666
-
-bar-volume-width = 10
-bar-volume-foreground-0 = ${xrdb:color12}
-bar-volume-foreground-1 = ${xrdb:color12}
-bar-volume-foreground-2 = ${xrdb:color12}
-bar-volume-foreground-3 = ${xrdb:color12}
-bar-volume-foreground-4 = ${xrdb:color12}
-bar-volume-foreground-5 = ${xrdb:color12}
-bar-volume-foreground-6 = ${xrdb:color12}
-bar-volume-gradient = true
-bar-volume-indicator = 
-bar-volume-indicator-font = 2
-bar-volume-fill = ─
-bar-volume-fill-font = 2
-bar-volume-empty = ─
-bar-volume-empty-font = 2
-bar-volume-empty-foreground = ${colors.foreground-alt}
 
 [module/wifi]
 type = internal/network
@@ -268,21 +234,68 @@ label-connected = %essid%
 ; Default: (none)
 ;label-disconnected = not connected
 
+[module/xwindow]
+type = internal/xwindow
+
+label = %title:..%
+label-maxlen = 100
+label-foreground = ${colors.color1}
+label-padding = 1
+
+; Used instead of label when there is no window title
+label-empty = "Desktop"
+label-empty-foreground = ${colors.foreground} 
+
+label-empty-padding = 2
+
 [module/battery]
 type = internal/battery
 battery = BAT0
 adapter = ADP0
 full-at = 100
-
-;format-charging = <label-charging>
+format-charging = <animation-charging> <label-charging>
 ;format-charging-underline = #ffb52a
-
-format-discharging = <label-discharging>
-;format-discharging-underline = ${self.format-charging-underline}
-
-;format-full-prefix = " "
-;format-full-prefix-foreground = ${colors.foreground-alt}
-;format-full-underline = ${self.format-charging-underline}
+format-discharging = <ramp-capacity> <label-discharging>
+format-discharging-underline = ${self.format-charging-underline}
+format-full-prefix = "%{T6}%{T-}  "
+format-full-prefix-foreground = #a3be8c
+; format-full-underline = ${color
+ramp-capacity-0 = %{T6}%{F#bf616a}%{F-}%{T-}
+ramp-capacity-1 = %{T6}%{F#bf616a}%{F-}%{T-}
+ramp-capacity-2 = %{T6}%{F#d08770}%{F-}%{T-}
+ramp-capacity-3 = %{T6}%{F#d08770}%{F-}%{T-}
+ramp-capacity-4 = %{T6}%{F#d08770}%{F-}%{T-}
+ramp-capacity-5 = %{T6}%{F#ebcb8b}%{F-}%{T-}
+ramp-capacity-6 = %{T6}%{F#ebcb8b}%{F-}%{T-}
+ramp-capacity-7 = %{T6}%{F#ebcb8b}%{F-}%{T-}
+ramp-capacity-8 = %{T6}%{F#a3be8c}%{F-}%{T-}
+ramp-capacity-9 = %{T6}%{F#a3be8c}%{F-}%{T-}
+ramp-capacity-10 = %{T6}%{F#a3be8c}%{F-}%{T-}
+ramp-capacity-foreground = #a3be8c
+animation-charging-9 = %{T6}%{T-}
+animation-charging-8 = %{T6}%{T-}
+animation-charging-7 = %{T6}%{T-}
+animation-charging-6 = %{T6}%{T-}
+animation-charging-5 = %{T6}%{T-}
+animation-charging-4 = %{T6}%{T-}
+animation-charging-3 = %{T6}%{T-}
+animation-charging-2 = %{T6}%{T-}
+animation-charging-1 = %{T6}%{T-}
+animation-charging-0 = %{T6}%{T-}
+animation-charging-foreground = #81a1c1
+animation-charging-framerate = 750
+;animation-discharging-0 = %{T6}%{T-}
+;animation-discharging-1 = %{T6}%{T-}
+;animation-discharging-2 = %{T6}%{T-}
+;animation-discharging-3 = %{T6}%{T-}
+;animation-discharging-4 = %{T6}%{T-}
+;animation-discharging-5 = %{T6}%{T-}
+;animation-discharging-6 = %{T6}%{T-}
+;animation-discharging-7 = %{T6}%{T-}
+;animation-discharging-8 = %{T6}%{T-}
+;animation-discharging-9 = %{T6}%{T-}
+;animation-discharging-foreground = #ebcb8b
+;animation-discharging-framerate = 750
 
 [module/temperature]
 type = internal/temperature
@@ -363,7 +376,7 @@ label-focused-padding = 2
 
 ; Available tokens:
 ;   %name%
-;   %icon%
+content = "  "
 ;   %index%
 ;   %output%
 ; Default: %icon%  %name%
@@ -395,3 +408,27 @@ label-urgent-padding = 2
 ;label-separator = |
 ;label-separator-padding = 0
 ;label-separator-foreground = #ffb52a
+
+[module/sep]
+type = custom/text
+content = ""
+content-background = ${colors.background}
+content-foreground = ${colors.background}
+
+[settings]
+throttle-output = 5
+throttle-output-for = 10
+compositing-background = source
+compositing-foreground = over
+compositing-overline = over
+compositing-underline = over
+compositing-border = over
+pseudo-transparency = true
+format-foreground =
+format-background =
+format-underline =
+format-overline =
+format-spacing =
+format-padding =
+format-margin =
+format-offset =
