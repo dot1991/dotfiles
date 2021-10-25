@@ -21,7 +21,6 @@ encrypt() {
 decrypt() {
 	gpg -do "$temp/$out.tar.bz2" "$out.tar.bz2.gpg"
 	tar jxvf "$temp/$out.tar.bz2"
-	rm -rf -- "$out.tar.bz2.gpg"
 }
 
 # u=rwx g= o=
