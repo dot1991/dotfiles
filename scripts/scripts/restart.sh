@@ -4,6 +4,7 @@
 killall -wq polybar
 
 i3-msg -q restart
+swaymsg reload
 
 feh --bg-fill ~/.local/share/wallpapers/current
 

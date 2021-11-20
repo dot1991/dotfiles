@@ -4,6 +4,9 @@
 # Somewhat compatible with oh-my-zsh plugins
 # just download them in the .zsh/plugins folder
 
+# Sway
+~/.config/scripts/sway.sh
+
 # Add any custom variable exports here
 #
 # Example:
