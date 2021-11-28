@@ -1,49 +1,58 @@
 #!/bin/sh
-set -e
 
-help() {
-	cat << EOF
-Usage: $0 [command] [key id] [files...]
+key='pzarganitis@gmail.com'
+archive='tar.bz2'
+tarflags='j'
+ext='local'
 
-Commands:
----------
-enc - Encrypts the specified files
-dec - Decrypts the specified files
-EOF
-}
+# or load from config, if it exists
+[ -r './config' ] && . "./config"
+
+tar='/usr/bin/tar'
+gpg='/usr/bin/gpg'
+
+umask 077
+
+out="$(basename "$PWD")"
+
+files="$(find . -name "*.${ext}" -printf '%p ')"
 
 encrypt() {
-	tar jcvf "$temp/$out.tar.bz2" "$@"
-	gpg -er "$keyid" "$temp/$out.tar.bz2"
-	mv "$temp/$out.tar.bz2.gpg" .
+	if [ -z "$files" ]; then
+		printf '\e[0;31m[x]\e[0m Cannot find files.\n'
+		exit 1
+	fi
+
+	$tar -c${tarflags}f - -- $files | $gpg -er "${key}" -o "${out}.${archive}.gpg"
 }
 
 decrypt() {
-	gpg -do "$temp/$out.tar.bz2" "$out.tar.bz2.gpg"
-	tar jxvf "$temp/$out.tar.bz2"
+	if [ ! -r "${out}.${archive}.gpg" ]; then
+		printf '\e[0;31m[x]\e[0m Cannot find archive.\n'
+		exit 1
+	fi
+
+	$gpg -d "${out}.${archive}.gpg" | $tar -x${tarflags}f -
 }
 
-# u=rwx g= o=
-umask 077
+usage() {
+	printf "Usage: %s [command]\n" "$0"
+	printf "\n"
+	printf "Commands:\n"
+	printf "=========\n"
+	printf "e - Encrypt\n"
+	printf "d - Decrypt\n"
+}
 
-out="${OUT:=$(basename "$PWD")}"
+case "$1" in
+"e")
+	encrypt
+	;;
+"d")
+	decrypt
+	;;
+*)
+	usage
+	;;
 
-command="$1"
-
-temp="$(mktemp -d)"
-case "$command" in
-	"enc")
-		shift
-		keyid="$1"
-		shift
-		encrypt "$@"
-	;;
-	"dec")
-		shift
-		decrypt "$@"
-	;;
-	*)
-		help
-	;;
 esac
-rm -rf -- "$temp"

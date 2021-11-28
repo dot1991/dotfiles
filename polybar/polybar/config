@@ -80,7 +80,7 @@ module-margin-right = 2
 font-0 = Inconsolata Nerd Font:pixelsize=15:antialias=true;3
 
 modules-left = logo i3 xwindow
-modules-center = github reddit youtube discord code
+modules-center =
 modules-right = xkeyboard wifi sep battery sep pulseaudio date powermenu
 
 tray-position = right
