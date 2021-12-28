@@ -106,7 +106,7 @@ bindsym XF86MonBrightnessDown exec ~/.config/scripts/backlight.sh s 5%-
 
 ### Other apps
 bindsym $mod+Shift+Return exec --no-startup-id kitty
-bindsym $mod+Shift+f exec --no-startup-id chromium
+bindsym $mod+Shift+f exec --no-startup-id run-gpu librewolf
 bindsym $mod+t exec --no-startup-id thunar 
 bindsym $mod+d exec --no-startup-id rofi -show-icons -show drun
 

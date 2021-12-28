@@ -4,9 +4,6 @@
 # Somewhat compatible with oh-my-zsh plugins
 # just download them in the .zsh/plugins folder
 
-# Sway
-~/.config/scripts/sway.sh
-
 # Add any custom variable exports here
 #
 # Example:
@@ -14,8 +11,12 @@
 # export EDITOR=nano
 # export MYVAR="my variable"
 
+. /etc/profile
+
 # Fix for git commit -S -m: failed to sign data
 export GPG_TTY=$(tty)
+
+export WINEPREFIX="$HOME/wine"
 
 export EDITOR=nvim
 export PATH=$HOME/.bin:$HOME/.local/bin:$HOME/.gem/ruby/3.0.0/bin:$HOME/.gem/ruby/2.7.0/bin:$PATH
@@ -64,13 +65,6 @@ done <<< "$plugins"
 ########## Theming ##########
 #############################
 
-# If you have pywal installed then this will automagically apply your current theme
-if tty|grep -q tty; then
-	test -r "$HOME/.cache/wal/colors-tty.sh" && source "$HOME/.cache/wal/colors-tty.sh"
-else
-	test -r "$HOME/.cache/wal/sequences" && /bin/cat "$HOME/.cache/wal/sequences"
-fi
-
 # zsh colors
 autoload -U colors && colors
 eval "$(dircolors -b)"
@@ -102,7 +96,7 @@ stty -ixon
 # Example:
 # set_win_title My New Window Title
 function set_win_title(){
-    echo -ne "\033]0;$@\007"
+    echo -ne "\033]0;🚀 $PWD\007"
 }
 
 # Make the cd command irrelevant,
