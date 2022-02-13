@@ -18,7 +18,7 @@ export GPG_TTY=$(tty)
 
 export WINEPREFIX="$HOME/wine"
 
-export EDITOR=nvim
+export EDITOR=vim
 export PATH=$HOME/.bin:$HOME/.local/bin:$HOME/.gem/ruby/3.0.0/bin:$HOME/.gem/ruby/2.7.0/bin:$PATH
 export JAVA_HOME=$(readlink -f /usr/bin/javac | sed "s:/bin/javac::")
 

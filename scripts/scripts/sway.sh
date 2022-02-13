@@ -1,7 +1,8 @@
 #!/bin/sh
 
 launch() {
-	sway --my-next-gpu-wont-be-nvidia
+	export GBM_BACKEND=nvidia-drm
+	export __GLX_VENDOR_LIBRARY_NAME=nvidia
+	sway --unsupported-gpu
 }
 
-[ "$(tty)" = "/dev/tty1" ] && launch
