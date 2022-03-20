@@ -76,7 +76,7 @@ set $ws10 "10"
 ### Window rules ###
 ####################
 
-assign [class="discord"] $ws4
+#assign [class="discord"] $ws4
 #assign [class="spotify"] $ws5
 # Doesnt work pls fix
 
@@ -223,7 +223,7 @@ bindsym $mod+r mode "resize"
 
 ## General
 # focus
-#focus_follows_mouse no
+focus_follows_mouse yes
 
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r exec --no-startup-id ~/.config/scripts/restart.sh

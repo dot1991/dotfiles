@@ -14,7 +14,7 @@ alias tree='lsd --tree'
 
 alias git="hub"
 alias cat='bat'
-alias rm='trash'
+alias rm='trash -i'
 
 alias g="grep"
 alias c="clear"

@@ -49,7 +49,5 @@ modules-left    = menu i3
 modules-center  = date
 modules-right   =  xkeyboard wifi battery pulseaudio
 
-wm-restack = bspwm
-
 cursor-click  = pointer
 enable-ipc = true
