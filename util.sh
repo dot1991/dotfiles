@@ -9,7 +9,7 @@ ext='local'
 [ -r './config' ] && . "./config"
 
 tar='/usr/bin/tar'
-gpg='/usr/bin/gpg'
+gpg='/usr/bin/qubes-gpg-client-wrapper'
 
 umask 077
 

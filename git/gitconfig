@@ -7,7 +7,7 @@
 [init]
 	defaultBranch = master
 [gpg]
-	program = gpg2
+	program = /usr/bin/qubes-gpg-client-wrapper
 [diff]
 	tool = meld
 [filter "lfs"]

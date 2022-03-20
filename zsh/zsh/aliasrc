@@ -13,7 +13,8 @@ alias lrt='lsd -1Fcrt --color=auto'
 alias tree='lsd --tree'
 
 alias git="hub"
-alias cat='bat'
+alias gpg="qubes-gpg-client-wrapper"
+alias cat='batcat'
 alias rm='trash -i'
 
 alias g="grep"
