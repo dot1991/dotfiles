@@ -1,0 +1,8 @@
+#!/bin/sh
+
+for i in apparmor.d/*; do
+	file="/etc/$i"
+
+	sudo apparmor_parser -R "$file"
+	sudo rm -v "$file"
+done

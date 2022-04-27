@@ -6,12 +6,11 @@
 	protocol = ssh
 [init]
 	defaultBranch = master
-[gpg]
-	program = /usr/bin/qubes-gpg-client-wrapper
-[diff]
-	tool = meld
 [filter "lfs"]
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
 	clean = git-lfs clean -- %f
+[fetch]
+	prune = true
+	pruneTags = true

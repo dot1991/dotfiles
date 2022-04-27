@@ -1,6 +1,4 @@
 #!/bin/bash
 
-# Used for kde
-#qdbus org.kde.ksmserver /ScreenSaver org.freedesktop.ScreenSaver.Lock
-
-betterlockscreen -l blur
+#/usr/bin/i3lock -c '#000000'
+/usr/bin/dm-tool lock

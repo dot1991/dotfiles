@@ -1,0 +1,101 @@
+# vim:syntax=apparmor
+# AppArmor policy for firefox
+include <tunables/global>
+
+
+profile firefox /usr/lib/firefox/{firefox,testbash} {
+  abi <abi/3.0>,
+
+  ################
+  #### System ####
+  ################
+
+  # capabilities
+  deny capability sys_admin,
+  capability sys_chroot,
+  capability sys_ptrace,
+
+  # base includes
+  include <abstractions/base>
+  include <abstractions/X>
+  include <abstractions/audio>
+
+  # hardware acceleration
+  include <abstractions/vulkan>
+  include <abstractions/nvidia>
+  @{etc_ro}/libva.conf r,
+  /usr/share/egl/{,**} r,
+
+  # network
+  include <abstractions/nameservice>
+
+  # misc
+  include <abstractions/gnome>
+  include <abstractions/gio-open>
+
+  include <abstractions/kde>
+  include <abstractions/kde-open5>
+
+  include <abstractions/xdg-open>
+  include <abstractions/freedesktop.org>
+
+  # dconf
+  include <abstractions/dconf>
+  @{run}/user/*/dconf/user rw,
+
+  # Firefox binaries & extra libraries
+  /usr/lib/firefox/** mrixlk,
+
+  # Firefox child processes
+  @{PROC}/[0-9]*/** rw,
+
+  # Temporary downloads
+  /tmp/{,**} rwk,
+
+  # Crash reporter & some hardware acceleration features
+  @{PROC}/sys/** r,
+  /sys/** r,
+
+  # Extra stuff for file types
+  @{etc_ro}/mime.types r,
+  @{etc_ro}/mailcap r,
+
+  # Video conferencing
+  # you can uncomment this if you use the camera, i dont
+  #include <abstractions/video>
+  #/dev/video* rw,
+
+  ################
+  ##### User #####
+  ################
+
+  # Allow firefox to read user data
+  owner @{HOME}/{,**} r,
+
+  # Mozilla user data directory
+  owner @{HOME}/.mozilla/** mrwlk,
+
+  # Firefox cache
+  owner @{HOME}/.cache/event-sound-cache.* rw,
+  owner @{HOME}/.cache/mozilla/{,**} rw,
+  owner @{HOME}/.cache/mesa_shader_cache/{,**} rwk,
+
+  # Downloads folder
+  owner @{HOME}/Downloads/{,**} rw,
+
+
+  # Protect sensitive files
+
+  # ssh
+  audit deny @{HOME}/.ssh** mrwlk,
+
+  # gpg
+  audit deny @{HOME}/.gnupg** mrwlk,
+
+  # git
+  audit deny @{HOME}/.gitconfig** mrwlk,
+
+  # dotfiles
+  audit deny @{HOME}/.dotfiles** mrwlk,
+
+}

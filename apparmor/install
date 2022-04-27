@@ -1,0 +1,5 @@
+#!/bin/sh
+set -e
+. "$ROOT/settings.sh"
+
+sudo cp -v apparmor.d/* /etc/apparmor.d
