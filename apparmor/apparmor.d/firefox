@@ -3,7 +3,7 @@
 include <tunables/global>
 
 
-profile firefox /usr/lib/firefox/{firefox,testbash} {
+profile firefox /usr/lib/firefox/firefox {
   abi <abi/3.0>,
 
   ################

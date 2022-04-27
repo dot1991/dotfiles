@@ -22,7 +22,7 @@ uninstall_from() {
 	for folder in "$@"; do
 		[ -d "$folder" ] &&
 			[ -x "$folder/$UNINSTALL_SCRIPT" ] &&
-			printf "Uninstalling %s\n" "$(basename "$folder")\n" &&
+			printf "Uninstalling %s\n" "$(basename "$folder")" &&
 			env -C "$folder" "ROOT=$SELF" "./$UNINSTALL_SCRIPT"
 	done
 }
