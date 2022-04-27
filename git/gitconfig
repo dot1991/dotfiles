@@ -14,3 +14,5 @@
 [fetch]
 	prune = true
 	pruneTags = true
+[color]
+	ui = 1

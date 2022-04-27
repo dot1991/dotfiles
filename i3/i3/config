@@ -19,8 +19,8 @@ font pango: CaskaydiaCove Nerd Font 10
 
 for_window [class="^.*"] border pixel 1
 
-gaps inner 4
-gaps outer 4
+gaps inner 6
+gaps outer 6
 
 set_from_resource $fg i3wm.color7 #f0f0f0
 set_from_resource $bg i3wm.color2 #f0f0f0
@@ -226,7 +226,7 @@ bindsym $mod+r mode "resize"
 focus_follows_mouse yes
 
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-bindsym $mod+Shift+r exec --no-startup-id ~/.config/scripts/init.sh
+bindsym $mod+Shift+r exec --no-startup-id ~/.config/scripts/init.sh restart
 
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
